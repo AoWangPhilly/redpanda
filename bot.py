@@ -21,6 +21,9 @@ async def on_member_remove(member):
 async def ping(ctx):
     await ctx.send(f'pong! {round(bot.latency * 1000)}ms')
 
+@bot.command()
+async def clear(ctx, amount=5):
+    await ctx.channel.purge(limit=amount)
 
 @bot.command()
 async def integrate(ctx, *, eq):

@@ -130,3 +130,5 @@ dmypy.json
 
 bot_token.txt
 .idea
+
+/bot-env

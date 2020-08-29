@@ -15,12 +15,25 @@ async def on_ready():
     print('Logged on as {0}!'.format(bot.user))
 
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send('Please pass in all required arguments!! @.@')
+    elif isinstance(error, commands.CommandNotFound):
+        await ctx.send('Invalid command used!! >.<')
+    elif isinstance(error, commands.MissingPermissions):
+        await ctx.send('You don\'t got the power!! :D')
+    else:
+        await ctx.send('Somethang wong? :<')
+
+
 @bot.command()
 async def ping(ctx):
     await ctx.send(f'pong! {round(bot.latency * 1000)}ms')
 
 
 @bot.command()
+@commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount=5):
     await ctx.channel.purge(limit=amount)
 

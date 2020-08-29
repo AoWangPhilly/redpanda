@@ -131,6 +131,6 @@ dmypy.json
 bot_token.txt
 .idea
 
-/bot-env
+src/bot-env
 output.png
 graph.png

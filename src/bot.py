@@ -10,6 +10,7 @@ bot = commands.Bot(command_prefix='!')
 
 @bot.event
 async def on_ready():
+    await bot.change_presence(status=discord.Status.idle, activity=discord.Game('your mum, panda panda! 🐼'))
     print('Logged on as {0}!'.format(bot.user))
 
 
@@ -38,9 +39,9 @@ async def integrate(ctx, *, eq):
     try:
         eq = parse_expr(eq.replace('^', '**'))
         sympy.preview(sympy.integrate(eq), viewer='file',
-                filename='output.png', dvioptions=['-D', '200'])
+                      filename='output.png', dvioptions=['-D', '200'])
         await ctx.send(file=discord.File('output.png'))
-    except: 
+    except:
         await ctx.send('Error! Try again :<')
 
 
@@ -49,9 +50,9 @@ async def derive(ctx, *, eq):
     try:
         eq = parse_expr(eq.replace('^', '**'))
         sympy.preview(sympy.diff(eq), viewer='file',
-                filename='output.png', dvioptions=['-D', '200'])
+                      filename='output.png', dvioptions=['-D', '200'])
         await ctx.send(file=discord.File('output.png'))
-    except: 
+    except:
         await ctx.send('Error! Try again :<')
 
 
@@ -70,5 +71,4 @@ if __name__ == '__main__':
     else:
         with open('bot_token.txt') as bot_token_file:
             token = bot_token_file.readline()
-            print(sympy.__version__)
             bot.run(token)

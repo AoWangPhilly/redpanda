@@ -1,5 +1,5 @@
 import os
-from sympy import *
+import sympy
 import discord
 from discord.ext import commands
 from sympy.parsing.sympy_parser import parse_expr
@@ -37,10 +37,10 @@ async def clear(ctx, amount=5):
 async def integrate(ctx, *, eq):
     try:
         eq = parse_expr(eq.replace('^', '**'))
-        preview(integrate(eq), viewer='file',
+        sympy.preview(sympy.integrate(eq), viewer='file',
                 filename='output.png', dvioptions=['-D', '200'])
         await ctx.send(file=discord.File('output.png'))
-    except:
+    except: 
         await ctx.send('Error! Try again :<')
 
 
@@ -48,10 +48,10 @@ async def integrate(ctx, *, eq):
 async def derive(ctx, *, eq):
     try:
         eq = parse_expr(eq.replace('^', '**'))
-        preview(diff(eq), viewer='file',
+        sympy.preview(sympy.diff(eq), viewer='file',
                 filename='output.png', dvioptions=['-D', '200'])
         await ctx.send(file=discord.File('output.png'))
-    except:
+    except: 
         await ctx.send('Error! Try again :<')
 
 
@@ -70,5 +70,5 @@ if __name__ == '__main__':
     else:
         with open('bot_token.txt') as bot_token_file:
             token = bot_token_file.readline()
-
+            print(sympy.__version__)
             bot.run(token)

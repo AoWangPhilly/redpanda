@@ -1,11 +1,22 @@
+'''
+description: a Discord bot that solves simple arthimetic problems 
+to complex multivariate calculus probelms, graphs single variable equations,
+and tells jokes.
+'''
+
 import os
 import discord
 from discord.ext import commands
 from cogs.greetings import Greetings
+from cogs.vector import Vector
 from cogs.calculus import Calculus
 
+# Adding ! before each command
 bot = commands.Bot(command_prefix='!')
+
+# Adding different cogs for included functionality 
 bot.add_cog(Greetings(bot))
+bot.add_cog(Vector(bot))
 bot.add_cog(Calculus(bot))
 
 
@@ -27,12 +38,14 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
+    '''Returns pong!'''
     await ctx.send(f'pong! {round(bot.latency * 1000)}ms')
 
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount=5):
+    '''Clear n-amount of messages'''
     await ctx.channel.purge(limit=amount)
 
 if __name__ == '__main__':

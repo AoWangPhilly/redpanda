@@ -15,16 +15,14 @@ async def on_ready():
     print('Logged on as {0}!'.format(bot.user))
 
 
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('Please pass in all required arguments!! @.@')
-    elif isinstance(error, commands.CommandNotFound):
-        await ctx.send('Invalid command used!! >.<')
-    elif isinstance(error, commands.MissingPermissions):
-        await ctx.send('You don\'t got the power!! :D')
-    else:
-        await ctx.send('Somethang wong? :<')
+# @bot.event
+# async def on_command_error(ctx, error):
+#     if isinstance(error, commands.MissingRequiredArgument):
+#         await ctx.send('Please pass in all required arguments!! @.@')
+#     elif isinstance(error, commands.CommandNotFound):
+#         await ctx.send('Invalid command used!! >.<')
+#     elif isinstance(error, commands.MissingPermissions):
+#         await ctx.send('You don\'t got the power!! :D')
 
 
 @bot.command()

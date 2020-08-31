@@ -31,7 +31,7 @@ def scrapeJokes():
 
     qna = {i: j for i, j in zip(q, a)}
 
-    with open('cogs/jokes.json', 'w') as joke_file:
+    with open('src/cogs/jokes.json', 'w') as joke_file:
         json.dump(qna, joke_file)
 
 
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     for i in range(2, NUM_PAGE_MEMES):
         listOfMemes.extend(scrapeMemes(
             'https://www.memedroid.com/memes/tag/math/{}'.format(i)))
-            
-    with open('memes.txt', 'w') as memes:
+
+    with open('src/cogs/memes.txt', 'w') as memes:
         for src in listOfMemes:
             memes.write('{}\n'.format(src))

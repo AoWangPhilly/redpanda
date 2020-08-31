@@ -42,5 +42,5 @@ class Greetings(commands.Cog):
     @commands.command()
     async def meme(self, ctx):
         '''Sends math memes'''
-        with open('memes.txt', 'r') as memes:
+        with open('src/cogs/memes.txt', 'r') as memes:
             await ctx.send(choice(memes.read().split('\n')))

@@ -34,7 +34,7 @@ class Greetings(commands.Cog):
     @commands.command()
     async def joke(self, ctx):
         '''Tells math jokes'''
-        with open('jokes.json') as joke_file:
+        with open('src/cogs/jokes.json') as joke_file:
             jokes = json.load(joke_file)
             q = choice(list(jokes.keys()))
             await ctx.send('Q: ***{}***\nA: {}'.format(q, jokes[q]))

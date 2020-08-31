@@ -31,7 +31,7 @@ def scrapeJokes():
 
     qna = {i: j for i, j in zip(q, a)}
 
-    with open('jokes.json', 'w') as joke_file:
+    with open('cogs/jokes.json', 'w') as joke_file:
         json.dump(qna, joke_file)
 
 

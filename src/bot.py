@@ -7,11 +7,11 @@ and tells jokes.
 import os
 import discord
 from discord.ext import commands
-from cogs.greetings import Greetings
-from cogs.vector import Vector
-from cogs.calculus import Calculus
 
-# Adding ! before each command
+from src.cogs.greetings import Greetings
+from src.cogs.vector import Vector
+from src.cogs.calculus import Calculus
+
 bot = commands.Bot(command_prefix='!')
 
 # Adding different cogs for included functionality 
@@ -38,15 +38,20 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
-    '''Returns pong!'''
+    """
+    Returns pong!
+    """
     await ctx.send(f'pong! {round(bot.latency * 1000)}ms')
 
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount=5):
-    '''Clear n-amount of messages'''
+    """
+    Clear n-amount of messages
+    """
     await ctx.channel.purge(limit=amount)
+
 
 if __name__ == '__main__':
     token = os.getenv('TOKEN')

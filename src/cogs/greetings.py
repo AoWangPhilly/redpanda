@@ -5,6 +5,10 @@ import json
 
 
 class Greetings(commands.Cog):
+    """
+    Fun commands to try
+    """
+
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
@@ -33,7 +37,7 @@ class Greetings(commands.Cog):
 
     @commands.command()
     async def joke(self, ctx):
-        '''Tells math jokes'''
+        """Tells math jokes"""
         with open('src/cogs/jokes.json') as joke_file:
             jokes = json.load(joke_file)
             q = choice(list(jokes.keys()))
@@ -41,6 +45,6 @@ class Greetings(commands.Cog):
 
     @commands.command()
     async def meme(self, ctx):
-        '''Sends math memes'''
+        """Sends math memes"""
         with open('src/cogs/memes.txt', 'r') as memes:
             await ctx.send(choice(memes.read().split('\n')))

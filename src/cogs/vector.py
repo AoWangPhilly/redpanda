@@ -18,6 +18,7 @@ class Vector(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.file_location = 'temp/vector.png'
 
     @commands.command()
     async def dot(self, ctx, v1: convert, v2: convert):
@@ -27,8 +28,8 @@ class Vector(commands.Cog):
     @commands.command()
     async def cross(self, ctx, v1: convert, v2: convert):
         """Computes cross product"""
-        sympy.preview(v1.cross(v2), viewer='file', filename='vector.png')
-        await ctx.send(file=discord.File('vector.png'))
+        sympy.preview(v1.cross(v2), viewer='file', filename=self.file_location)
+        await ctx.send(file=discord.File(self.file_location))
 
     @commands.command()
     async def norm(self, ctx, vec: convert):
@@ -38,12 +39,12 @@ class Vector(commands.Cog):
     @commands.command()
     async def normalize(self, ctx, vec: convert):
         """Normalizes vector"""
-        sympy.preview(vec.normalize(), viewer='file', filename='vector.png')
-        await ctx.send(file=discord.File('vector.png'))
+        sympy.preview(vec.normalize(), viewer='file', filename=self.file_location)
+        await ctx.send(file=discord.File(self.file_location))
 
     @commands.command()
     async def proj(self, ctx, vec1: convert, vec2: convert):
         """Finds projection of first vector onto second"""
         sympy.preview(vec1.projection(vec2),
-                      viewer='file', filename='vector.png')
-        await ctx.send(file=discord.File('vector.png'))
+                      viewer='file', filename=self.file_location)
+        await ctx.send(file=discord.File(self.file_location))

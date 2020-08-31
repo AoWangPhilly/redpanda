@@ -11,6 +11,7 @@ from discord.ext import commands
 from src.cogs.greetings import Greetings
 from src.cogs.vector import Vector
 from src.cogs.calculus import Calculus
+from src.cogs.algebra import Algebra
 
 bot = commands.Bot(command_prefix='!')
 
@@ -18,6 +19,7 @@ bot = commands.Bot(command_prefix='!')
 bot.add_cog(Greetings(bot))
 bot.add_cog(Vector(bot))
 bot.add_cog(Calculus(bot))
+bot.add_cog(Algebra(bot))
 
 
 @bot.event

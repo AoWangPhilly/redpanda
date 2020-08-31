@@ -132,6 +132,4 @@ bot_token.txt
 .idea
 
 src/bot-env
-output.png
-graph.png
-vector.png
+temp/

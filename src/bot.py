@@ -8,10 +8,10 @@ import os
 import discord
 from discord.ext import commands
 
-from src.cogs.greetings import Greetings
-from src.cogs.vector import Vector
-from src.cogs.calculus import Calculus
-from src.cogs.graph import Graph
+from cogs.greetings import Greetings
+from cogs.vector import Vector
+from cogs.calculus import Calculus
+from cogs.graph import Graph
 
 bot = commands.Bot(command_prefix='!')
 

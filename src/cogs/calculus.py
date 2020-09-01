@@ -37,14 +37,14 @@ class Calculus(commands.Cog):
         await ctx.send(file=discord.File(self.file_location))
 
     @commands.command(pass_context=True, aliases=['I2', 'i2'])
-    async def double_integral(self, ctx, *, eq: parse_eq, order: parse_var):
+    async def double_integral(self, ctx, eq: parse_eq, order: parse_var):
         """Computes double integrals"""
         sympy.preview(sympy.integrate(eq, order[0], order[1]), viewer='file',
                       filename=self.file_location, dvioptions=['-D', '200'])
         await ctx.send(file=discord.File(self.file_location))
     
     @commands.command(pass_context=True, aliases=['I3', 'i3'])
-    async def triple_integral(self, ctx, *, eq: parse_eq, order: parse_var):
+    async def triple_integral(self, ctx, eq: parse_eq, order: parse_var):
         """Computes triple integrals"""
         sympy.preview(sympy.integrate(eq, order[0], order[1], order[2]), viewer='file',
                       filename=self.file_location, dvioptions=['-D', '200'])

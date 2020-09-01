@@ -1,8 +1,7 @@
 import discord
 from discord.ext import commands
-from sympy import plot_parametric
 from sympy.parsing.sympy_parser import parse_expr
-from sympy.plotting import plot
+from sympy.plotting import *
 
 
 def parse_eq(eq):
@@ -27,9 +26,30 @@ class Graph(commands.Cog):
         p1.save(self.graph_location)
         await ctx.send(file=discord.File(self.graph_location))
 
+    @commands.command()
+    async def graph3d(self, ctx, *, eq: parse_eq):
+        """Graphs equations in 3d"""
+        p1 = plot3d(eq, show=False)
+        p1.save(self.graph_location)
+        await ctx.send(file=discord.File(self.graph_location))
+
     @commands.command(name='pgraph')
     async def p_graph(self, ctx, x: parse_eq, y: parse_eq):
         """Graph parametric equations"""
         p1 = plot_parametric(x, y)
-        p1.save(self.graph_location)
+        p1.save(self.parametric_graph_location)
+        await ctx.send(file=discord.File(self.parametric_graph_location))
+
+    @commands.command(name='pgraph3dline')
+    async def p_graph_line(self, ctx, x: parse_eq, y: parse_eq, z: parse_eq):
+        """Graph 3d parametric equations in line form"""
+        p1 = plot3d_parametric_line(x, y, z)
+        p1.save(self.parametric_graph_location)
+        await ctx.send(file=discord.File(self.parametric_graph_location))
+
+    @commands.command(name='pgraph3dsurface')
+    async def p_graph_surface(self, ctx, x: parse_eq, y: parse_eq, z: parse_eq):
+        """Graph 3d parametric equations in surface form"""
+        p1 = plot3d_parametric_surface(x, y, z)
+        p1.save(self.parametric_graph_location)
         await ctx.send(file=discord.File(self.parametric_graph_location))

@@ -2,15 +2,7 @@ import discord
 from discord.ext import commands
 import sympy
 from sympy.parsing.sympy_parser import parse_expr
-
-
-def parse_eq(eq):
-    eq = eq.replace('^', '**').replace('e', 'E')
-    return parse_expr(eq)
-
-
-def parse_var(var):
-    return sympy.symbols(' '.join(list(var)))
+from cogs.math_parser import parse_eq, parse_var
 
 
 class Calculus(commands.Cog):
@@ -42,7 +34,7 @@ class Calculus(commands.Cog):
         sympy.preview(sympy.integrate(eq, order[0], order[1]), viewer='file',
                       filename=self.file_location, dvioptions=['-D', '200'])
         await ctx.send(file=discord.File(self.file_location))
-    
+
     @commands.command(pass_context=True, aliases=['I3', 'i3'])
     async def triple_integral(self, ctx, eq: parse_eq, order: parse_var):
         """Computes triple integrals"""

@@ -3,11 +3,7 @@ from discord.ext import commands
 from matplotlib import animation
 from sympy.parsing.sympy_parser import parse_expr
 from sympy.plotting import *
-
-
-def parse_eq(eq):
-    eq = eq.replace('^', '**').replace('e', 'E')
-    return parse_expr(eq)
+from cogs.math_parser import parse_eq
 
 
 class Graph(commands.Cog):
@@ -90,7 +86,8 @@ class Graph(commands.Cog):
 
         ax.plot(x, y, z, label='parametric curve')
         ax.legend()
-        rotation = animation.FuncAnimation(fig, rotate, frames=np.arange(0, 362, 2), interval=100)
+        rotation = animation.FuncAnimation(
+            fig, rotate, frames=np.arange(0, 362, 2), interval=100)
         rotation.save('temp/rotation.gif', dpi=80, writer='imagemagick')
 
         await ctx.send(file=discord.File('temp/rotation.gif'))

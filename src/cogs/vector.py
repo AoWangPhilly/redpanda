@@ -3,12 +3,7 @@ from discord.ext import commands
 import sympy
 from sympy.matrices import Matrix
 from sympy.vector import CoordSys3D, matrix_to_vector
-
-
-def convert(vec):
-    C = CoordSys3D('')
-    vec = vec.replace('<', '').replace('>', '').split(',')
-    return matrix_to_vector(Matrix(list(map(int, vec))), C)
+from cogs.math_parser import convert
 
 
 class Vector(commands.Cog):
@@ -39,7 +34,8 @@ class Vector(commands.Cog):
     @commands.command()
     async def normalize(self, ctx, vec: convert):
         """Normalizes vector"""
-        sympy.preview(vec.normalize(), viewer='file', filename=self.file_location)
+        sympy.preview(vec.normalize(), viewer='file',
+                      filename=self.file_location)
         await ctx.send(file=discord.File(self.file_location))
 
     @commands.command()

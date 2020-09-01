@@ -8,9 +8,16 @@ import os
 import discord
 from discord.ext import commands
 
+# noinspection PyUnresolvedReferences
 from cogs.greetings import Greetings
+
+# noinspection PyUnresolvedReferences
 from cogs.vector import Vector
+
+# noinspection PyUnresolvedReferences
 from cogs.calculus import Calculus
+
+# noinspection PyUnresolvedReferences
 from cogs.graph import Graph
 
 bot = commands.Bot(command_prefix='!')

@@ -17,6 +17,6 @@ class Plane(commands.Cog):
 
     @commands.command(pass_context=True, aliases=['pointnormal'])
     async def point_normal(self, ctx, p1: parse_pt, normal: parse_matrix):
-        sympy.preview(sympy.Plane(p1, normal_vector=list(normal)),
+        sympy.preview(sympy.Plane(p1, normal_vector=list(normal)).equation(),
                       viewer='file', filename=self.file_location)
         await ctx.send(file=discord.File(self.file_location))

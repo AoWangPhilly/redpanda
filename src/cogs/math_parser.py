@@ -18,8 +18,8 @@ def parse_var(var):
 
 
 def parse_matrix(var):
-    vec = vec.replace('<', '').replace('>', '').split(',')
-    return Matrix(list(map(int, vec)))
+    var = var.replace('<', '').replace('>', '').split(',')
+    return Matrix(list(map(int, var)))
 
 
 def convert(vec):

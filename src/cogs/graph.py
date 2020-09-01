@@ -9,7 +9,7 @@ def parse_eq(eq):
     return parse_expr(eq)
 
 
-class Algebra(commands.Cog):
+class Graph(commands.Cog):
     """
     Contains various algebra tools
     """

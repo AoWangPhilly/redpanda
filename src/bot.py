@@ -8,19 +8,12 @@ import os
 import discord
 from discord.ext import commands
 
-# noinspection PyUnresolvedReferences
 from cogs.greetings import Greetings
-
-# noinspection PyUnresolvedReferences
 from cogs.vector import Vector
-
-# noinspection PyUnresolvedReferences
 from cogs.calculus import Calculus
-
-# noinspection PyUnresolvedReferences
 from cogs.graph import Graph
-
 from cogs.plane import Plane
+
 bot = commands.Bot(command_prefix='!')
 
 # Adding different cogs for included functionality 
@@ -29,6 +22,7 @@ bot.add_cog(Vector(bot))
 bot.add_cog(Calculus(bot))
 bot.add_cog(Graph(bot))
 bot.add_cog(Plane(bot))
+
 
 @bot.event
 async def on_ready():

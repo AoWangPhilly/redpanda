@@ -24,7 +24,7 @@ def parse_matrix(var):
 
 def convert(vec):
     C = CoordSys3D('')
-    return matrix_to_vector(parse_matrix(vec, C))
+    return matrix_to_vector(parse_matrix(vec), C)
 
 
 if __name__ == '__main__':

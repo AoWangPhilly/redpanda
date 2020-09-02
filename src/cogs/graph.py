@@ -1,9 +1,8 @@
 import discord
 from discord.ext import commands
 from matplotlib import animation
-from sympy.parsing.sympy_parser import parse_expr
 from sympy.plotting import *
-from cogs.math_parser import parse_eq
+from utility.math_parser import parse_eq
 
 
 class Graph(commands.Cog):

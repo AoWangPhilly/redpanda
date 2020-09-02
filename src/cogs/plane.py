@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import sympy
-from cogs.math_parser import parse_pt, parse_matrix
+from utility.math_parser import parse_pt, parse_matrix
 
 
 class Plane(commands.Cog):

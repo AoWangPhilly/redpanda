@@ -1,9 +1,7 @@
 import discord
 from discord.ext import commands
 import sympy
-from sympy.matrices import Matrix
-from sympy.vector import CoordSys3D, matrix_to_vector
-from cogs.math_parser import convert
+from utility.math_parser import convert
 
 
 class Vector(commands.Cog):

@@ -1,5 +1,3 @@
-import datetime
-
 import discord
 from discord import Embed
 from discord.ext import commands
@@ -42,7 +40,7 @@ class Greetings(commands.Cog):
     @commands.command()
     async def joke(self, ctx):
         """Tells math jokes"""
-        with open('src/cogs/jokes.json') as joke_file:
+        with open('src/utility/jokes.json') as joke_file:
             jokes = json.load(joke_file)
             q = choice(list(jokes.keys()))
             await ctx.send('Q: ***{}***\nA: {}'.format(q, jokes[q]))
@@ -50,7 +48,7 @@ class Greetings(commands.Cog):
     @commands.command()
     async def meme(self, ctx):
         """Sends math memes"""
-        with open('src/cogs/memes.txt', 'r') as memes:
+        with open('src/utility/memes.txt', 'r') as memes:
             await ctx.send(choice(memes.read().split('\n')))
 
     @commands.command()

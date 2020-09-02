@@ -1,8 +1,7 @@
 import discord
 from discord.ext import commands
 import sympy
-from sympy.parsing.sympy_parser import parse_expr
-from cogs.math_parser import parse_eq, parse_var
+from utility.math_parser import parse_eq, parse_var
 
 
 class Calculus(commands.Cog):

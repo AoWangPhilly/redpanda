@@ -1,7 +1,11 @@
+import datetime
+
 import discord
+from discord import Embed
 from discord.ext import commands
 from random import choice
 import json
+import requests
 
 
 class Greetings(commands.Cog):
@@ -48,3 +52,22 @@ class Greetings(commands.Cog):
         """Sends math memes"""
         with open('src/cogs/memes.txt', 'r') as memes:
             await ctx.send(choice(memes.read().split('\n')))
+
+    @commands.command()
+    async def status(self, ctx):
+        """Shows status of Discord"""
+        URL = 'https://srhpyqt94yxb.statuspage.io/api/v2/incidents/unresolved.json'
+        incidents = requests.get(URL).json()["incidents"]
+
+        if len(incidents) == 0:
+            await ctx.send('Discord is not f--ked')
+        else:
+            await ctx.send('Discord is f--ked')
+
+            for incident in incidents:
+                embed = Embed(title='Incident name: ' + incident['name'], url=incident['shortlink'], description='Services affected')
+
+                for component in incident['components']:
+                    embed.add_field(name=component['name'], value=component['description'])
+
+                await ctx.send(embed=embed)

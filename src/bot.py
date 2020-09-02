@@ -64,6 +64,11 @@ async def clear(ctx, amount=5):
 
 
 if __name__ == '__main__':
+    try:
+        os.mkdir('temp')
+    except FileExistsError:
+        pass
+
     token = os.getenv('TOKEN')
     if token:
         bot.run(token)

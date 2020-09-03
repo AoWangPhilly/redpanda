@@ -5,6 +5,8 @@ from random import choice
 import json
 import requests
 
+from utility.math_parser import parse_eq
+
 
 class Greetings(commands.Cog):
     """
@@ -50,6 +52,11 @@ class Greetings(commands.Cog):
         """Sends math memes"""
         with open('src/utility/memes.txt', 'r') as memes:
             await ctx.send(choice(memes.read().split('\n')))
+
+    @commands.command()
+    async def eval(self, ctx, *, eq):
+        """Evaluate equations"""
+        await ctx.send(parse_eq(eq).evalf())
 
     @commands.command()
     async def status(self, ctx):

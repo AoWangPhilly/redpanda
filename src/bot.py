@@ -14,6 +14,10 @@ from cogs.calculus import Calculus
 from cogs.graph import Graph
 from cogs.plane import Plane
 
+import matplotlib.pyplot as plt
+
+plt.style.use(['dark_background'])
+
 bot = commands.Bot(command_prefix='!')
 
 # Adding different cogs for included functionality 

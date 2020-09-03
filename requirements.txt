@@ -3,6 +3,7 @@ async-timeout==3.0.1
 asyncio==3.4.3
 attrs==20.1.0
 beautifulsoup4==4.9.1
+celluloid==0.2.0
 certifi==2020.6.20
 chardet==3.0.4
 cycler==0.10.0
@@ -14,10 +15,14 @@ matplotlib==3.3.1
 mpmath==1.1.0
 multidict==4.7.6
 numpy==1.19.1
+pandas==1.1.1
 Pillow==7.2.0
 pyparsing==2.4.7
 python-dateutil==2.8.1
+pytz==2020.1
 requests==2.24.0
+scipy==1.5.2
+seaborn==0.10.1
 six==1.15.0
 soupsieve==2.0.1
 sympy==1.6.2

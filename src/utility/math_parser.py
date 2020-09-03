@@ -1,12 +1,36 @@
+import regex as re
+from collections import defaultdict
+
 import sympy
 from sympy.matrices import Matrix
 from sympy.vector import CoordSys3D, matrix_to_vector
 from sympy.parsing.sympy_parser import parse_expr
 
+valid_math_functions = [
+    # Complexes
+    'sign', 'abs', 'arg',
+    # Trig Inverse
+    'asin', 'acos', 'atan', 'acot', 'asec', 'acsc', 'atan2',
+    # Hyperbolic
+    'sinh', 'cosh', 'tanh', 'coth', 'sech', 'csch',
+    # Trig Functions
+    'sin', 'cos', 'tan', 'cot', 'sec', 'csc', 'sinc',
+    # Hyperbolic Inverses
+    'asinh', 'acosh', 'atanh', 'acoth', 'asech', 'acsch',
+    # Exponential
+    'log',
+]
 
-def parse_eq(eq):
+valid_math_functions_regex = '|'.join(valid_math_functions)
+
+
+def parse_eq(eq, evaluate=False):
+    eq = re.sub('(?<=\\w|\\))(?=\\() | (?<=\\))(?=\\w) | (?<=\\d)(?=\\w)', '*', eq, flags=re.X)
+    print(eq)
+    eq = re.sub('(?<={})\\* '.format(valid_math_functions_regex), '', eq, flags=re.X)
     eq = eq.replace('^', '**').replace('e', 'E')
-    return parse_expr(eq)
+    print(eq)
+    return parse_expr(eq, evaluate=evaluate)
 
 
 def parse_pt(pt):

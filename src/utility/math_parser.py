@@ -22,17 +22,10 @@ def parse_matrix(var):
     return Matrix(list(map(int, var)))
 
 
-def parse_plane(plane):
-    x, y, z = sympy.symbols('x y z')
-    plane = parse_eq(plane)
-    pointEq = sympy.solve(plane, x, y, z)
-    points, temp = [], []
-    for t in range(3):
-        for point in pointEq[0]:
-            temp.append(point.subs([(x, t), (y, t), (z, t)]))
-        points.append(sympy.Point(temp))
-        temp = []
-    return sympy.Plane(points)
+def norm_vector(plane):
+    plane = sympy.Poly(parse_eq(plane))
+    constants = plane.coeffs()[:3]
+    return Matrix(constants)
 
 
 def convert(vec):

@@ -1,8 +1,7 @@
 import discord
 from discord.ext import commands
 import sympy
-from utility.math_parser import parse_pt, parse_matrix
-
+from utility.math_parser import parse_plane
 
 class Plane(commands.Cog):
     def __init__(self, bot):
@@ -20,3 +19,9 @@ class Plane(commands.Cog):
         sympy.preview(sympy.Plane(p1, normal_vector=list(normal)).equation(),
                       viewer='file', filename=self.file_location)
         await ctx.send(file=discord.File(self.file_location))
+
+    @commands.command()
+    async def compare(self, ctx, plane1: parse_plane, plane2: parse_plane):
+        if plane1.is_parallel(plane2): await ctx.send('Planes are **parallel**')
+        elif plane1.is_perpendicular(plane2): await ctx.send('Planes are **perpendicular**')
+        else: await ctx.send('Planes are neither parallel or perpendicular')

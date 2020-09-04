@@ -26,10 +26,8 @@ valid_math_functions_regex = '|'.join(valid_math_functions)
 
 def parse_eq(eq):
     eq = re.sub('(?<=\\w|\\))(?=\\() | (?<=\\))(?=\\w) | (?<=\\d)(?=\\w)', '*', eq, flags=re.X)
-    print(eq)
     eq = re.sub('(?<={})\\* '.format(valid_math_functions_regex), '', eq, flags=re.X)
     eq = eq.replace('^', '**').replace('e', 'E')
-    print(eq)
     return parse_expr(eq)
 
 

@@ -56,7 +56,10 @@ class Greetings(commands.Cog):
     @commands.command()
     async def eval(self, ctx, *, eq):
         """Evaluate equations"""
-        await ctx.send(parse_eq(eq).evalf())
+        try:
+            await ctx.send(str(parse_eq(eq).evalf()).rstrip('0').rstrip('.'))
+        except TypeError:
+            await ctx.send('Expression includes invalid function')
 
     @commands.command()
     async def status(self, ctx):

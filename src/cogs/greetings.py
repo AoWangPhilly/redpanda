@@ -58,7 +58,7 @@ class Greetings(commands.Cog):
         """Evaluate equations"""
         try:
             await ctx.send(str(parse_eq(eq).evalf()).rstrip('0').rstrip('.'))
-        except TypeError:
+        except:
             await ctx.send('Expression includes invalid function')
 
     @commands.command()

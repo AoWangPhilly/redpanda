@@ -4,6 +4,7 @@ from matplotlib import animation
 from sympy.plotting import *
 from utility.math_parser import parse_eq
 
+import numpy as np
 
 class Graph(commands.Cog):
     """
@@ -59,34 +60,11 @@ class Graph(commands.Cog):
         p1.save(self.parametric_graph_location)
         await ctx.send(file=discord.File(self.parametric_graph_location))
 
-    @commands.command(name='pgraphgif')
-    async def p_graph_gif(self, ctx):
-        """
-        Graph 3d parametric equations in surface form
-        Uses two parameters
-        """
-        import numpy as np
-        import matplotlib.pyplot as plt
-
-        plt.rcParams['legend.fontsize'] = 10
-
-        fig = plt.figure()
+        backend = p1._backend
+        fig = backend.fig
         ax = fig.gca(projection='3d')
 
-        def rotate(angle):
-            ax.view_init(azim=angle)
-
-        # Prepare arrays x, y, z
-        theta = np.linspace(-4 * np.pi, 4 * np.pi, 100)
-        z = np.linspace(-2, 2, 100)
-        r = z ** 2 + 1
-        x = r * np.sin(theta)
-        y = r * np.cos(theta)
-
-        ax.plot(x, y, z, label='parametric curve')
-        ax.legend()
-        rotation = animation.FuncAnimation(
-            fig, rotate, frames=np.arange(0, 362, 2), interval=100)
+        rotation = animation.FuncAnimation(fig, lambda angle: ax.view_init(azim=angle), frames=np.arange(0, 360, 30), interval=500)
         rotation.save('temp/rotation.gif', dpi=80, writer='imagemagick')
 
         await ctx.send(file=discord.File('temp/rotation.gif'))

@@ -51,20 +51,22 @@ class Graph(commands.Cog):
         await ctx.send(file=discord.File(self.parametric_graph_location))
 
     @commands.command(name='pgraph3dsurface')
-    async def p_graph_surface(self, ctx, x: parse_eq, y: parse_eq, z: parse_eq):
+    async def p_graph_surface(self, ctx, x: parse_eq, y: parse_eq, z: parse_eq, show_gif=False):
         """
         Graph 3d parametric equations in surface form
         Uses two parameters
         """
         p1 = plot3d_parametric_surface(x, y, z)
-        p1.save(self.parametric_graph_location)
-        await ctx.send(file=discord.File(self.parametric_graph_location))
 
-        backend = p1._backend
-        fig = backend.fig
-        ax = fig.gca(projection='3d')
+        if not show_gif:
+            p1.save(self.parametric_graph_location)
+            await ctx.send(file=discord.File(self.parametric_graph_location))
+        else:
+            backend = p1._backend
+            fig = backend.fig
+            ax = fig.gca(projection='3d')
 
-        rotation = animation.FuncAnimation(fig, lambda angle: ax.view_init(azim=angle), frames=np.arange(0, 360, 30), interval=500)
-        rotation.save('temp/rotation.gif', dpi=80, writer='imagemagick')
+            rotation = animation.FuncAnimation(fig, lambda angle: ax.view_init(azim=angle), frames=np.arange(0, 360, 30), interval=500)
+            rotation.save('temp/rotation.gif', dpi=80, writer='imagemagick')
 
-        await ctx.send(file=discord.File('temp/rotation.gif'))
+            await ctx.send(file=discord.File('temp/rotation.gif'))

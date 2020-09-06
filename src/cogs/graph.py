@@ -14,21 +14,21 @@ class Graph(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.graph_location = 'temp/graph.png'
-        self.parametric_graph_location = 'temp/parametric_graph.png'
+        self.gif_location = 'temp/rotation.gif'
 
     @commands.command()
-    async def graph(self, ctx, *, eq: parse_eq):
+    async def graph(self, ctx, eq: parse_eq):
         """Graphs simple equations"""
         p1 = plot(eq, show=False)
-        p1.save(self.graph_location)
-        await ctx.send(file=discord.File(self.graph_location))
+
+        await self.send_graph(ctx, p1, self.graph_location, False)
 
     @commands.command()
-    async def graph3d(self, ctx, *, eq: parse_eq):
+    async def graph3d(self, ctx, eq: parse_eq, show_gif=False):
         """Graphs equations in 3d"""
         p1 = plot3d(eq, show=False)
-        p1.save(self.graph_location)
-        await ctx.send(file=discord.File(self.graph_location))
+
+        await self.send_graph(ctx, p1, self.graph_location, show_gif)
 
     @commands.command(name='pgraph')
     async def p_graph(self, ctx, x: parse_eq, y: parse_eq):
@@ -37,18 +37,18 @@ class Graph(commands.Cog):
         Uses a single parameter
         """
         p1 = plot_parametric(x, y)
-        p1.save(self.parametric_graph_location)
-        await ctx.send(file=discord.File(self.parametric_graph_location))
+
+        await self.send_graph(ctx, p1, self.graph_location, False)
 
     @commands.command(name='pgraph3dline')
-    async def p_graph_line(self, ctx, x: parse_eq, y: parse_eq, z: parse_eq):
+    async def p_graph_line(self, ctx, x: parse_eq, y: parse_eq, z: parse_eq, show_gif=False):
         """
         Graph 3d parametric equations in line form
         Uses a single parameter
         """
         p1 = plot3d_parametric_line(x, y, z)
-        p1.save(self.parametric_graph_location)
-        await ctx.send(file=discord.File(self.parametric_graph_location))
+
+        await self.send_graph(ctx, p1, self.graph_location, show_gif)
 
     @commands.command(name='pgraph3dsurface')
     async def p_graph_surface(self, ctx, x: parse_eq, y: parse_eq, z: parse_eq, show_gif=False):
@@ -58,15 +58,19 @@ class Graph(commands.Cog):
         """
         p1 = plot3d_parametric_surface(x, y, z)
 
+        await self.send_graph(ctx, p1, self.graph_location, show_gif)
+
+    async def send_graph(self, ctx, p1, file_location, show_gif):
+        p1.save(file_location)
+
         if not show_gif:
-            p1.save(self.parametric_graph_location)
-            await ctx.send(file=discord.File(self.parametric_graph_location))
+            await ctx.send(file=discord.File(file_location))
         else:
             backend = p1._backend
             fig = backend.fig
             ax = fig.gca(projection='3d')
 
             rotation = animation.FuncAnimation(fig, lambda angle: ax.view_init(azim=angle), frames=np.arange(0, 360, 30), interval=500)
-            rotation.save('temp/rotation.gif', dpi=80, writer='imagemagick')
+            rotation.save(self.gif_location, dpi=80, writer='imagemagick')
 
-            await ctx.send(file=discord.File('temp/rotation.gif'))
+            await ctx.send(file=discord.File(self.gif_location))

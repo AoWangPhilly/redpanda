@@ -12,7 +12,8 @@ from cogs.greetings import Greetings
 from cogs.vector import Vector
 from cogs.calculus import Calculus
 from cogs.graph import Graph
-from cogs.plane import Plane
+from cogs.plane_and_line import Plane
+from cogs.extrema import Extrema
 
 import matplotlib.pyplot as plt
 
@@ -26,6 +27,7 @@ bot.add_cog(Vector(bot))
 bot.add_cog(Calculus(bot))
 bot.add_cog(Graph(bot))
 bot.add_cog(Plane(bot))
+bot.add_cog(Extrema(bot))
 
 
 @bot.event

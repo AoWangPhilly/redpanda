@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
 import sympy
-from utility.math_parser import convert
+import axiomathbf
+from utility.math_parser import convert, parse_eq
 
 
 class Vector(commands.Cog):
@@ -40,5 +41,23 @@ class Vector(commands.Cog):
     async def proj(self, ctx, vec1: convert, vec2: convert):
         """Finds projection of first vector onto second"""
         sympy.preview(vec1.projection(vec2),
+                      viewer='file', filename=self.file_location)
+        await ctx.send(file=discord.File(self.file_location))
+
+    @commands.command()
+    async def integvect(self, ctx, v1: parse_eq, v2: parse_eq, v3: parse_eq):
+        sympy.preview(axiomathbf.VectorFunction([v1, v2, v3]).integrate().get_vector(),
+                      viewer='file', filename=self.file_location)
+        await ctx.send(file=discord.File(self.file_location))
+
+    @commands.command()
+    async def diffvect(self, ctx, v1: parse_eq, v2: parse_eq, v3: parse_eq):
+        sympy.preview(axiomathbf.VectorFunction([v1, v2, v3]).derive().get_vector(),
+                      viewer='file', filename=self.file_location)
+        await ctx.send(file=discord.File(self.file_location))
+
+    @commands.command()
+    async def domain(self, ctx, v1: parse_eq, v2: parse_eq, v3: parse_eq):
+        sympy.preview(axiomathbf.VectorFunction([v1, v2, v3]).get_domain(),
                       viewer='file', filename=self.file_location)
         await ctx.send(file=discord.File(self.file_location))
